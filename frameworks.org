@@ -1,0 +1,194 @@
+* Overview
+After looking through available options, I feel that we would be best served by
+choosing a framework built on top of Theano. Theano itself is probably a little
+too low-level for the amount of time we have and what we're hoping to
+accomplish, but choosing a framework built on top will allow us to leverage its
+advantages.
+
+In terms of dependencies, most Python ML frameworks generally require NumPy,
+SciPy, and a C and C++ compiler.
+
+Some of the frameworks are packaged in PyPI, but generally must be built from
+source with bleeding-edge versions of Theano (i.e. Clone and build from git
+repo).
+
+After spending some time investigating, I'd say that I liked Keras the best,
+followed by Lasagne. OpenDeep seems like a good choice as well, but the library
+might still be too immature to start using.
+
+Mariana seems easy to use, but I'm not sure how expressive it can be, or how
+well supported it is compared to other options.
+
+Pylearn2 seems like it might be hard to use and extend, requiring its own
+markup language to define the architecture, and becoming difficult if you need
+to access internals.
+
+Scikit-learn seems like a popular option, but doesn't have great support for
+Neural Networks by itself, poor support for optimization, and is more of a
+black box.
+
+* Frameworks
+** Theano
+Library for defining, optimizing, and evaluating mathematical expressions
+involving mutli-dimensional arrays.
+
+License: Permissive license. See:
+http://deeplearning.net/software/theano/LICENSE.html
+
+Website:
+http://deeplearning.net/software/theano/index.html
+https://github.com/theano/theano
+
+*** Advantages
+- Powerful primitives for defining mathematical computations.
+- Generates C code for fast execution.
+- Transparent use of GPU for optimization.
+*** Disadvantages
+- Quite low level. Mostly a mathematical expressions library rather than an ML
+  framework.
+- Might be hard to learn.
+- Only real GPU support uses CUDA, and therefore requires an NVIDIA GPU. OpenCL
+  support is minimal.
+*** Dependencies
+**** Required
+- Python 2.6+ or Python 3.3+
+- g++, python-dev
+- NumPy >= 1.7.1
+- SciPy >= 0.11
+- Basic Linear Algebra Subprograms (BLAS) installation.
+**** Optional
+- Sphinx >= 0.5.1, pygments (Documentation generation)
+- NVIDIA CUDA drivers or libgpuarray (Required for GPU code
+  generation/execution)
+** Keras
+Theano-based Deep Learning library.
+
+License: MIT
+
+Website:
+http://keras.io/
+https://github.com/fchollet/keras
+
+*** Advantages
+- Easy and fast prototyping.
+- Good documentation with lots of examples.
+- Many network architectures available, including CNNs and RNNs.
+*** Disadvantages
+- Need to use bleeding-edge version.
+*** Dependencies
+**** Required
+- Theano and its dependencies. (Bleeding-edge)
+- PyYAML
+- HDF5 and h5py
+**** Optional
+- cuDNN (If we use CNNs)
+** Lasagne
+Lightweight library to build and train neural networks on top of Theano.
+
+License: MIT
+
+Website:
+https://github.com/Lasagne/Lasagne
+http://lasagne.readthedocs.org/en/latest/index.html
+
+*** Advantages
+- Offers a variety of different NN architectures (FFNs, CNNs, RNNs with LSTM,
+  or any combination).
+- Easy to use API for creating neural networks.
+*** Disadvantages
+- Requires at least some knowledge of Theano.
+*** Dependencies
+**** Required
+- Python 2.7 or Python 3.4
+- Theano and its dependencies (Tight version coupling).
+** OpenDeep
+General purpose deep learning library built on Theano with a focus on
+flexibility and modularity.
+
+License: Apache 2
+
+Website:
+http://www.opendeep.org/
+https://github.com/vitruvianscience/opendeep
+
+*** Advantages
+- Easy to use. Good flexibility.
+- Easy to add new models and link them together.
+- Nice primitives for creating Neural Networks.
+*** Disadvantages
+- In Alpha stages. Might be unstable or have some missing documentation.
+- Requires some knowledge of Theano for implementing models.
+*** Dependencies
+**** Required
+- Theano and its dependencies (Bleeding-edge)
+- Pillow (PIL)
+**** Optional
+- PyYAML (For YAML config files)
+- Bokeh (Live charting/plotting during training)
+** Mariana
+Machine learning library build on top of Theano that focuses on ease of use.
+
+License: Apache 2
+
+Website:
+http://bioinfo.iric.ca/~daoudat/Mariana/
+https://github.com/tariqdaouda/Mariana
+
+*** Advantages
+- Ease of use. Intuitive Neural Network construction.
+- Extensible.
+*** Disadvantages
+- Relatively newer project.
+- Must be built with bleeding-edge Theano.
+*** Dependencies
+**** Required
+- Theano and its dependencies.
+** Pylearn2
+A machine learning research library.
+
+License: 3-clause BSD
+
+Website:
+http://deeplearning.net/software/pylearn2/
+https://github.com/lisa-lab/pylearn2
+
+*** Advantages
+- Lots of machine learning primitives.
+- Uses a YAML-based markup language to describe Models, Training Algorithms,
+  Cost Functions, and Datasets. No Python required.
+*** Disadvantages
+- Large framework, so it will take some time to see what's available and to
+  learn it.
+- Will have to learn the markup language, which might cause difficulty.
+- Using the library as a Python library is not as well supported.
+- Must be built from source (No PyPI package).
+*** Dependencies
+**** Required
+- PyYAML
+- matplotlib for some plotting functionality.
+- Theano and its dependencies. (Potentially needs bleeding-edge version)
+** Scikit-learn
+Machine learning library build on top of SciPy.
+
+License: 3-clause BSD
+
+Website:
+http://scikit-learn.org/stable/
+https://github.com/scikit-learn/scikit-learn
+
+*** Advantages
+- Many canonical machine learning algorithms.
+- Easy to use.
+*** Disadvantages
+- Not a lot of Neural Network implementations. (RBMs only)
+- Only has well-established algorithms.
+- No GPU support.
+- Built as more of a black box.
+*** Dependencies
+**** Required
+- Python 2.6+ or Python 3.3+
+- NumPy >= 1.6.1
+- SciPy >= 0.9
+- C or C++ compiler.
+- C BLAS library.
+
